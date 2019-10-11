@@ -3,33 +3,32 @@ exports.up = function(knex) {
     return knex.schema
         .createTable('projects', tbl => {
             tbl.increments();
-
             tbl.text('name', 128)
                 .unique()
                 .notNullable();
-
-            tbl.text('description')
-
-            tbl.boolean('completed')
+            tbl.text('description');
+            tbl.boolean('completed');
         })
         .createTable('resource', tbl => {
-            tbl.increments()
-
+            tbl.increments();
             tbl.text('name', 128)
                 .unique()
                 .notNullable();
-
-            tbl.text('description')
+            tbl.text('description');
         })
         .createTable('task', tbl => {
-            tbl.increments()
-
-            tbl.text('description')
+            tbl.increments();
+            tbl.integer('project_id')
+                .unsigned()
                 .notNullable()
-
-            tbl.text('AddedInfo')
-            
-            tbl.boolean('completed')
+                .references('id')
+                .inTable('projects')
+                .onUpdate('CASCADE')
+                .onDelete('CASCADE');
+            tbl.text('description')
+                .notNullable();
+            tbl.text('notes');
+            tbl.boolean('completed');
         })
 };
   
