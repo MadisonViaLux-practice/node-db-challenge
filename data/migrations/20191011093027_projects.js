@@ -11,10 +11,17 @@ exports.up = function(knex) {
         })
         .createTable('resource', tbl => {
             tbl.increments();
-            tbl.text('name', 128)
+            tbl.text('resource_name', 128)
                 .unique()
                 .notNullable();
-            tbl.text('description');
+            tbl.integer('project_id')
+                .unsigned()
+                .notNullable()
+                .references('id')
+                .inTable('projects')
+                .onUpdate('CASCADE')
+                .onDelete('CASCADE');
+            tbl.text('resource_description');
         })
         .createTable('task', tbl => {
             tbl.increments();
@@ -29,7 +36,7 @@ exports.up = function(knex) {
                 .notNullable();
             tbl.text('task_notes');
             tbl.boolean('task_completed');
-            
+
         })
 };
   

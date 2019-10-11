@@ -5,9 +5,9 @@ exports.seed = function(knex) {
     .then(function () {
       // Inserts seed entries
       return knex('resource').insert([
-        {name: 'volts-RP', description: 'Resource description for volts-RP'},
-        {name: 'modded-RP', description: 'Resource description for modded-RP'},
-        {name: 'vanilla-RP', description: 'Resource description for vanilla-RP'}
+        {project_id: 1, resource_name: 'volts-RP', resource_description: 'Resource description for volts-RP'},
+        {project_id: 2, resource_name: 'modded-RP', resource_description: 'Resource description for modded-RP'},
+        {project_id: 3, resource_name: 'vanilla-RP', resource_description: 'Resource description for vanilla-RP'}
       ]);
     });
 };

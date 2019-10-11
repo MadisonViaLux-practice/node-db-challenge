@@ -7,9 +7,12 @@ module.exports = {
     add,
     findTask,
     addTask,
-    // findRes,
-    // findResById,
+    findRes,
+    addRes
 }
+
+
+
 
 function find(){
     return db('projects')
@@ -24,6 +27,7 @@ function add(proData){
     return db('projects')
         .insert(proData)
 }
+
 
 
 
@@ -42,12 +46,16 @@ function addTask(newTask){
 
 
 
+function findRes(id){
+    return db('projects AS p')
+        .join('resource AS r', {'p.id': 'r.project_id'})
+        .select('project_id', 'resource_name', 'resource_description')
+        .where({project_id: id})
+}
 
-// function findRes(){
-//     return db('resource')
-// }
 
-// function findResById(id){
-//     return db('resource')
-//         .where({id})
-// }
+function addRes(newRes){
+    return db('resource')
+        .insert(newRes)
+}
+
