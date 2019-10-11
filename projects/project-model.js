@@ -4,9 +4,11 @@ const db = require('../data/db-config')
 module.exports = {
     find,
     findById,
+    add,
+    findTask,
+    addTask,
     // findRes,
     // findResById,
-    findTask
 }
 
 function find(){
@@ -18,6 +20,28 @@ function findById(id){
         .where({id})
 }
 
+function add(proData){
+    return db('projects')
+        .insert(proData)
+}
+
+
+
+function findTask(id){
+    return db('projects AS p')
+        .join('task AS t', {'p.id': 't.project_id'})
+        .select('name', 'project_id', 'task_description', 'task_notes', 'task_completed')
+        .where({project_id: id})
+}
+
+function addTask(){
+    
+}
+
+
+
+
+
 // function findRes(){
 //     return db('resource')
 // }
@@ -26,10 +50,3 @@ function findById(id){
 //     return db('resource')
 //         .where({id})
 // }
-
-function findTask(id){
-    return db('projects AS p')
-        .join('task AS t', {'p.id': 't.project_id'})
-        .select('task_description', 'task_notes', 'task_completed', 'project_id')
-        .where({project_id: id})
-}
