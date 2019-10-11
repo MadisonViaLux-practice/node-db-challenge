@@ -45,6 +45,26 @@ router.get('/:id/task', (req, res) => {
 })
 
 
+router.post('/:id/task', (req, res) => {
+    const newTask = req.body;
+    const { id } = req.params; 
+  
+    Pro.findTask(id)
+    .then(task => {
+      if (task) {
+        Pro.addTask(newTask)
+        .then(t => {
+          res.status(201).json(t);
+        })
+      } else {
+        res.status(404).json({ message: 'Could not find task given id.' })
+      }
+    })
+    .catch (err => {
+      res.status(500).json({ message: 'Failed to create new task' });
+    });
+  });
+
 
 
 

@@ -34,8 +34,9 @@ function findTask(id){
         .where({project_id: id})
 }
 
-function addTask(){
-    
+function addTask(newTask){
+    return db('task')
+        .insert(newTask)
 }
 
 
