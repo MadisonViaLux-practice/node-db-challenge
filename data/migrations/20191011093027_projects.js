@@ -25,10 +25,11 @@ exports.up = function(knex) {
                 .inTable('projects')
                 .onUpdate('CASCADE')
                 .onDelete('CASCADE');
-            tbl.text('description')
+            tbl.text('task_description')
                 .notNullable();
-            tbl.text('notes');
-            tbl.boolean('completed');
+            tbl.text('task_notes');
+            tbl.boolean('task_completed');
+            
         })
 };
   
